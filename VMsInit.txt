@@ -1,0 +1,13 @@
+##VM INIT SCRIPT
+## Sequencia de comandos após cada start das VMs (script de inicialização)
+##
+# lançar o daemon gluster nos 3 nodes
+sudo service glusterd start
+# Após lançar aguardar 10 segundos até daemon estar lançado para que o mount não falhe
+sleep 10
+# Em cada VM fazer mount substituindo tf-node1 tf-node2 tf-node3
+sudo mount -t glusterfs tf-node1:/glustervol /var/sharedfiles
+sudo mount -t glusterfs tf-node2:/glustervol /var/sharedfiles
+sudo mount -t glusterfs tf-node3:/glustervol /var/sharedfiles
+# Lançar Spread em cada nó
+/usr/local/sbin/spread -c /usr/local/etc/vmsSpread.conf > /tmp/spreadlogs 2>&1 &

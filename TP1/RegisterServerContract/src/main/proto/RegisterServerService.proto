@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "registerserverservice";
+
+package registerserverservice; // package do proto
+
+service RegisterServerService {
+  //registers a server in Register. Returns True if successful
+  rpc registerServer(Server) returns (Confirmation);
+  //unregisters a server in Register. Returns True if successful
+  rpc unregister(Server) returns (Confirmation);
+}
+
+message Server {
+  string ip = 1;
+  int32 port = 2;
+}
+
+message Confirmation {
+  bool register = 1;
+  string error = 2;
+}
+
+
+
+
+
+

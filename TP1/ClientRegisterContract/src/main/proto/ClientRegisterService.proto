@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "clientregisterservice";
+
+package clientregisterservice; // package do proto
+
+service ClientRegisterService{
+  //gets the ip and port of a server from Register
+  rpc getServer(Nothing) returns (Server);
+  // informs the register about a server not being acessible
+  rpc reportBadServer(Server) returns (Nothing);
+}
+
+message Nothing {
+  string id = 1;
+}
+
+message Server {
+  string ip = 1;
+  int32 port = 2;
+}

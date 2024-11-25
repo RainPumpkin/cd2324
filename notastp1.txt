@@ -1,0 +1,26 @@
+Contratos:
+i) operação de acesso ao servidor Register para obter a localização de um dos servidores registados;
+ii) operações que permitem realizar upload de imagens para um servidor, uma lista de keywords a serem marcadas na imagem inicial e a obtenção posterior da correspondente imagem marcada
+iii)registo de servidores
+
+Ciente recebe (ip, porto) do Register Server como argumento de inicio
+
+Upload e Download via streaming de blocos de, por exemplo, 32Kbyte
+
+I:
+getServer:
+-retorna (ip,porto) de um servidor registado
+
+II:
+ProcessImage:
+-Envia uma ou mais imagens para processar, retorna ids
+CheckImage:
+-Ver se imagem está processada
+GetProcessedImage:
+-Retorna a imagem processada caso esteja, caso não, string/erro/idk
+
+III:
+registServer:
+-envia o (ip, port) para o Register "registar" o servidor
+unregistServer(!in enunciado):
+-same, para tirar o registo do servidor

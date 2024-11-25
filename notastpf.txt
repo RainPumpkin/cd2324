@@ -1,0 +1,41 @@
+Nodes:
+tf-node1 é o base do script.
+tf-base foi o original e está lá só pq eu tenho medo de eliminar e lixar a machine image.
+
+Resumo:
+Quando cria o resumo, o workleader junta todos os resumos num só ficheiro e guarda o ficheiro.
+Aquando disto, os ficheiros dos workers são destruidos, e cada worker cria um novo ficheiro.
+Aquando do segundo resumo, faz um novo resumo.
+Atenção: Resumo para cada um dos tipos.
+
+Eleição:
+Laboratório 4 ex5 é basicamente para pensar no algoritmo a ser aplicado aos workers
+Neste caso, cada um dos membros conhece sempre todos os membros
+Logo podemos criar um "algoritmo de ordenação" (uma maneira de organizar os workers, tipo id or something)
+Assim o algoritmo de eleição simplesmente escolhe o primeiro e pronto.
+A alinea d) do lab é em referência à mensagem "resume" que sinaliza a necessidade de eleger um lider para fazer o resumo das vendas.
+
+primeiro worker a entrar no grupo é lider.
+Após isso, cada um que chega pergunta "GetLeader".
+Responta do Lider "Lider={name}"
+Todos os workers definem este como lider.
+Nas mensagens de membership, caso o que saia seja o lider, todos definem que Lider=null
+aquando do resume, caso Lider = null, ESCOLHA
+
+Escolha:
+cada um vê se é o primeiro alfabeticamente.
+caso seja, informa que é lider.
+
+	
+6/12
+Server:
+Criar um exchange. envia o nome com a mensagem resumo aos workers. Worker leader envia para esse exchange a mensagem de notificação.
+No fim, elimina o exchange(?) (provavelmente necessário para quanto há pedidos concorrentes)
+o server tem um id(?) que pode ser usado como nome do Exchange. (maybe id+tipo pq à dois tipos)
+o que acontece se 3 user apps fazem pedidos de resume do mesmo tipo? cache resumo por x tempo? idk
+
+Worker:
+Cada worker só trabalho num tipo. Cada pedido de resume é só de um tipo.
+se houver 1 pedido de resumo ALIMENTOS seguido de um pedido para CASA, os workers de ALIMENTOS elegem um worker leader.
+MAS ou os workers de CASA elegem outro worker leader OU esperam o resumo de ALIMENTOS terminar?
+if 2 then o que acontece com os workers de CASA ou se o work leader for CASA.

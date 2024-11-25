@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "clientserverservice";
+
+package clientserverservice; // package do proto
+
+service ClientServerService{
+  //check connection
+  rpc ping(Nada) returns (Nada);
+  //sends image in blocks to be processed by Server, returns id for future acess
+  rpc ProcessImage(stream Image) returns (ImageId);
+  //checks the status on the image to known if it's available to download
+  rpc CheckImageStatus(ImageId) returns (ImageStatus);
+  //downloads the processed image in blocks from the Server
+  rpc GetProcessedImage(ImageId) returns (stream Image);
+  //sends a list of keywords to mark the image
+  rpc KeywordList(Keywords) returns (Confirmation);
+}
+
+message Image{
+  string name = 1;
+  bytes data = 2;
+}
+
+message ImageId{
+  string id = 1;
+}
+
+message ImageStatus{
+  bool status = 1;
+}
+
+message Keywords{
+  string id = 1;
+  repeated string keywords = 2;
+}
+
+message Confirmation {
+  bool valid = 1;
+  string error = 2;
+}
+
+message Nada {
+  string id = 1;
+}

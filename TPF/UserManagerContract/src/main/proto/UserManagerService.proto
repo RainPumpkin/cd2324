@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "usermanagerservice";
+
+package usermanagerservice; // package do proto
+
+service UserManagerService {
+    rpc getResume(Type) returns (stream Resume);
+}
+
+message Type{
+  string type = 1;
+}
+
+message Resume{
+  string name = 1;
+  bytes data = 2;
+}
